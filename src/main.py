@@ -4,7 +4,7 @@ import math
 
 
 def main():
-   
+  
     W, H = 800, 800
     win = Window(W, H)
     c =  win.canvas  

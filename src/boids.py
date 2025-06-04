@@ -40,3 +40,5 @@ class Boid:
         self.x += math.cos(self.heading) * self.speed
         self.y += math.sin(self.heading) * self.speed
         self.draw()
+        
+    
