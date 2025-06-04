@@ -7,7 +7,7 @@ class Window:
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
         self.__root.title("Boid Simulator")
         
-        self.__canvas = Canvas(self.__root, bg="White", width=width, height=height)
+        self.__canvas = Canvas(self.__root, bg="skyblue", width=width, height=height)
         self.__canvas.pack(fill=BOTH, expand=1)
         self.__running = False 
         
