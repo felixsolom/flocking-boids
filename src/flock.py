@@ -15,7 +15,8 @@ class Flock:
             self.boids.append(Boid(canvas, x, y, heading=heading))
         self.perception = 50
         self.max_force = 0.1
-        self.max_speed = 5
+        self.max_speed = 9.0
+        
         
     def update(self):
         for boid in self.boids:
@@ -27,8 +28,9 @@ class Flock:
             steer_ali = self._alignment(boid, neighbors)
             steer_coh = self._cohesion(boid, neighbors)
             
-            boid.heading += steer_sep * 1.5 + steer_ali * 1.0 + steer_coh * 1.0
-            boid.speed = min(boid.speed, self.max_speed)
+            turn = steer_sep * 1.5 + steer_ali * 1.0 + steer_coh * 1.0
+            boid.last_turn = turn 
+            boid.heading += turn 
             self._wrap_edges(boid)
             boid.update()
         
