@@ -14,10 +14,10 @@ class Boid:
         self.size = size
         self.color = color 
         self.id = None 
-        self.cruise_speed = 3.0
-        self.max_accel = 0.2
-        self.max_speed = 9.0
-        self.min_speed = 0.5
+        self.cruise_speed = 4.0
+        self.max_accel = 0.25
+        self.max_speed = 10.0
+        self.min_speed = 0.2
         self.last_turn = 0.0
          
         
@@ -57,6 +57,7 @@ class Boid:
         thrust = max(-self.max_accel, min(self.max_accel, desired_change))
         turn_factor = min(abs(self.last_turn) / self.max_accel, 1.0)
         brake = turn_factor * self.max_accel * 1.5
+        #brake = min(abs(self.last_turn)/self.max_accel, 1.0) * self.max_accel * 1.5
         accel = thrust - brake 
         accel = max(-self.max_accel, min(self.max_accel, accel))
         self.speed += accel 

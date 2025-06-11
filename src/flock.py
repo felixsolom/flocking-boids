@@ -3,7 +3,7 @@ import random
 from boids import Boid
 
 class Flock:
-    def __init__(self, canvas, width, height, num_boids=30):
+    def __init__(self, canvas, width, height, num_boids=30, obstacles=None):
         self.canvas = canvas
         self.width = width
         self.height = height
@@ -14,8 +14,11 @@ class Flock:
             heading = random.uniform(0, 2*math.pi)
             self.boids.append(Boid(canvas, x, y, heading=heading))
         self.perception = 50
-        self.max_force = 0.1
-        self.max_speed = 9.0
+        self.max_force = 0.5
+        self.max_speed = 10.0
+        self.obstacles = obstacles or []
+        self.obs_avoid_dist = 80
+        self.obs_weight = 5.0
         
         
     def update(self):
@@ -28,9 +31,21 @@ class Flock:
             steer_ali = self._alignment(boid, neighbors)
             steer_coh = self._cohesion(boid, neighbors)
             
-            turn = steer_sep * 1.5 + steer_ali * 1.0 + steer_coh * 1.0
+            steer_obs = 0
+            for obs in self.obstacles:
+                future_x = boid.x + math.cos(boid.heading) * boid.speed * 10 
+                future_y = boid.y + math.sin(boid.heading) * boid.speed * 10
+                dx = future_x - obs.x
+                dy = future_y - obs.y
+                dist = math.hypot(dx, dy)
+                if dist < obs.radius + self.obs_avoid_dist:
+                    angle_to_obs = math.atan2(dy, dx)
+                    steer_obs += self._steer_angle(boid, angle_to_obs + math.pi)
+
+            turn = steer_sep * 1.5 + steer_ali * 1.0 + steer_coh * 1.0 + steer_obs*self.obs_weight
             boid.last_turn = turn 
             boid.heading += turn 
+            
             self._wrap_edges(boid)
             boid.update()
         
