@@ -1,29 +1,39 @@
-# flocking-boids
-This is a boids algorithm simulator 
+<div align="center">
+  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGhxYnN5ZjRkbHdheTY1dmY0MTczcGVsOWd0eDQ0MXV5cnQxdjhpbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26gst1l8FrcnFPa12/giphy.gif" width="100">
+</div>
 
-## boids
-Boids are a kind of birds. More precisely, they are little triangles that simulate the movememt of birds in a flock. The [idea](https://en.wikipedia.org/wiki/Boids) was developed by [Craig Raynolds](https://en.wikipedia.org/wiki/Craig_Reynolds_(computer_graphics)) in 1986. The algorithm has three basic forces that influence each boid's individual behavior in a flock.
+# 🐦 Flocking Boids
 
-### separation:
-Basically, the directive to steer away from neighbors to avoid overcrowding.
+A flocking birds simulation algorithm builder and visualizer. "Boids" follow a set of simple rules, creating complex and lifelike swarm behavior on a screen.
 
-### Alighnment:
-Steer toward the average heading of of other boids that are considered neighbors.
 
-### Cohision:
-Steer towards the average position of your neghbors
+## What is this?
 
-## Flock
-The flock is the sum of all boids conducting themselves in accordance to all the different forces of the algorithm. 
+This project is a simulation of "boids," an artificial life program developed by Craig Reynolds in 1986. It's a very cool attempt to explain complex emerging behavior with a few very simple rools, and this is why I like it. It complexity reduced to simplicty 
 
-## Acceleration / Deceleration mechanics
-Each time an individual boid forced to make a change of its heading and forced to steer, it's also forced to lower its speed. when it's back in the clear, the boid is free to accelerate until it gets to cruise speed. 
-This acceleration/Deceleration mechanic is panctuated by a color change. From Blue to Red, when Green in the middle represent regular cruising speed 
+Each boid follows three basic rules:
+*   **Separation:** Steer to avoid crowding local flockmates.
+*   **Alignment:** Steer towards the average heading of local flockmates.
+*   **Cohesion:** Steer to move toward the average position of local flockmates.
 
-## Obstacles
-Obstacles are mouse click induced objects that force avoidance behavior on the boids. I must say that in this stage of the project, the competing forces of the algorithm make it so, that the avoidance behavior is not particularly convincing. Something to continue working on.
+Another touch here, you can also click your mouse to create obstacles and see how the flock reacts!
 
-## Tkinter 
-I chose the tkinter to represent visually all of the above. It is, I found a bit poor on the graphic side, but it freed me to deal with an actual logic of what I'm doing. 
-Maybe the next step should be more captivating visual representation
+Also there is a color indicator of speed. Each boid changes it color according to accelerating or deccelerating pattern. 
 
+## How to Run
+
+This project uses Python's built-in `tkinter` library, so no need to install any special packages.
+
+1.  Clone this repository:
+    ```bash
+    git clone https://github.com/felixsolomon/flocking-boids.git
+    cd flocking-boids
+    ```
+2.  Run the simulation:
+    ```bash
+    python3 src/main.py
+    ```
+
+## A Little Backstory
+
+As a backend developer, my primary portfolio project is well, not very surprisingly a web application written in Go. This little simulation I built for fun, and to explore different programming concepts free of constraints, but also to show a different side of my skills. i trully enjoyed too much building it, and maybe it's also fun for others to watch.
